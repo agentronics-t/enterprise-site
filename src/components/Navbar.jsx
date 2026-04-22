@@ -1,0 +1,104 @@
+import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import { Menu, X } from 'lucide-react'
+import { useWaitlist } from './WaitlistContext'
+
+const navLinks = [
+  { label: 'Why Agentronics', href: '#problems' },
+  { label: 'How It Works', href: '#how-it-works' },
+  { label: 'Pricing', href: '#pricing' },
+]
+
+export default function Navbar() {
+  const { openWaitlist } = useWaitlist()
+  const [scrolled, setScrolled] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 50)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  return (
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-bg-primary/80 backdrop-blur-xl border-b border-white/5'
+          : 'bg-transparent'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        {/* Logo */}
+        <a href="#" className="flex items-center gap-2">
+          <img src="/favicon.svg" alt="Agentronics" className="w-8 h-8" />
+          <span className="text-xl font-bold text-text-primary">
+            Agentronics
+          </span>
+        </a>
+
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="text-sm text-text-secondary hover:text-text-primary transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        {/* CTAs */}
+        <div className="hidden md:flex items-center gap-3">
+          <button
+            onClick={openWaitlist}
+            className="px-4 py-2 text-sm font-semibold rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg-primary hover:opacity-90 transition-opacity cursor-pointer"
+          >
+            Get Started
+          </button>
+        </div>
+
+        {/* Mobile toggle */}
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="md:hidden text-text-primary"
+        >
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="md:hidden bg-bg-card/95 backdrop-blur-xl border-b border-white/5 px-6 pb-6"
+        >
+          <div className="flex flex-col gap-4 pt-4">
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className="text-text-secondary hover:text-text-primary transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+            <button
+              onClick={() => { setMobileOpen(false); openWaitlist(); }}
+              className="px-4 py-2 text-center text-sm font-semibold rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg-primary cursor-pointer"
+            >
+              Get Started
+            </button>
+          </div>
+        </motion.div>
+      )}
+    </motion.nav>
+  )
+}

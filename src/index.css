@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary: #07091A;
+  --color-bg-card: color-mix(in srgb, #07091A 85%, #6366F1 15%);
+  --color-bg-card-hover: color-mix(in srgb, #07091A 75%, #6366F1 25%);
+  --color-border-glow: #6366F1;
+  --color-border-glow-30: rgba(99, 102, 241, 0.3);
+  --color-accent: #F59E0B;
+  --color-accent-hover: color-mix(in srgb, #F59E0B 80%, #ffffff 20%);
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #94a3b8;
+  --color-success: #22c55e;
+  --color-code-bg: color-mix(in srgb, #07091A 90%, #6366F1 10%);
+  --color-danger: #ef4444;
+
+  --font-sans: 'Space Mono', ui-monospace, monospace;
+  --font-mono: 'Space Mono', ui-monospace, monospace;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-bg-primary);
+    color: var(--color-text-secondary);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgba(99, 102, 241, 0.4);
+    color: #fff;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg-primary);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-glow-30);
+    border-radius: 3px;
+  }
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.3; }
+}
+
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(99, 102, 241, 0.2) 1px, transparent 1px);
+  background-size: 32px 32px;
+  animation: dotPulse 4s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.card-glow {
+  position: relative;
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.card-glow:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.1), inset 0 0 30px rgba(99, 102, 241, 0.03);
+}
