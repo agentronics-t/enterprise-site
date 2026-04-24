@@ -7,12 +7,12 @@ import { useWaitlist } from '../components/WaitlistContext'
 const plans = [
   {
     name: 'Free',
-    tagline: 'For side projects & experiments',
+    tagline: 'For indie devs & WebMCP experimenters',
     monthlyPrice: 0,
     yearlyPrice: 0,
     features: [
-      '1,000 governed tool calls/mo',
-      'Basic agent authentication',
+      '1,000 governed agent interactions/mo',
+      'Basic identity detection',
       'Community support',
       'Single site',
     ],
@@ -21,16 +21,16 @@ const plans = [
   },
   {
     name: 'Pro',
-    tagline: 'For production applications',
+    tagline: 'For teams taking agent traffic seriously',
     monthlyPrice: 149,
     yearlyPrice: 119,
     features: [
-      '50K governed tool calls/mo',
-      'Full auth + authorization',
-      'Memory & session management',
+      '50K governed interactions/mo',
+      'Full three-path detection (WebMCP · Web Bot Auth · Stealth)',
+      'Policy engine & rate limits',
       'Observability dashboard',
+      'Agent analytics — clean your data',
       'Email support',
-      'Up to 5 sites',
     ],
     cta: 'Start Pro Trial',
     popular: true,
@@ -41,12 +41,12 @@ const plans = [
     monthlyPrice: null,
     yearlyPrice: null,
     features: [
-      'Unlimited tool calls',
-      'SSO / SAML integration',
-      'Full audit trails',
+      'Unlimited interactions',
+      'SSO / SAML',
+      'Audit trail exports · compliance-ready',
       'Custom SLA',
       'Dedicated onboarding',
-      'Self-hosted option',
+      'Agent commerce features (early access)',
     ],
     cta: 'Contact Sales',
     popular: false,
@@ -62,7 +62,7 @@ export default function Pricing() {
       <div className="max-w-6xl mx-auto">
         <SectionHeading
           prefix="PRICING"
-          title="Flexible deployment."
+          title="Start free. Govern at scale."
         />
 
         {/* Toggle */}

@@ -6,6 +6,7 @@ import { useWaitlist } from './WaitlistContext'
 const navLinks = [
   { label: 'Why Agentronics', href: '#problems' },
   { label: 'How It Works', href: '#how-it-works' },
+  { label: 'Dashboard', href: '#dashboard' },
   { label: 'Pricing', href: '#pricing' },
 ]
 
@@ -59,7 +60,7 @@ export default function Navbar() {
             onClick={openWaitlist}
             className="px-4 py-2 text-sm font-semibold rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg-primary hover:opacity-90 transition-opacity cursor-pointer"
           >
-            Get Started
+            Get Early Access
           </button>
         </div>
 
@@ -94,7 +95,7 @@ export default function Navbar() {
               onClick={() => { setMobileOpen(false); openWaitlist(); }}
               className="px-4 py-2 text-center text-sm font-semibold rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg-primary cursor-pointer"
             >
-              Get Started
+              Get Early Access
             </button>
           </div>
         </motion.div>

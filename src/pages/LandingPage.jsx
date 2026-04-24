@@ -5,15 +5,15 @@ import Hero from '../sections/Hero'
 import Problems from '../sections/Problems'
 import Solution from '../sections/Solution'
 import HowItWorks from '../sections/HowItWorks'
-import Demo from '../sections/Demo'
+import Dashboard from '../sections/Dashboard'
+import AgentCommerce from '../sections/AgentCommerce'
 import Landscape from '../sections/Landscape'
 import Pricing from '../sections/Pricing'
+import EarlyAccess from '../sections/EarlyAccess'
 import Builder from '../sections/Builder'
 import Footer from '../sections/Footer'
 
 export default function LandingPage() {
-  // Fix: when arriving via anchor link (e.g. /#pricing), nudge scroll
-  // so IntersectionObserver fires and reveals the whileInView content
   useEffect(() => {
     if (window.location.hash) {
       const el = document.querySelector(window.location.hash)
@@ -35,9 +35,11 @@ export default function LandingPage() {
         <Problems />
         <Solution />
         <HowItWorks />
-        <Demo />
+        <Dashboard />
+        <AgentCommerce />
         <Landscape />
         <Pricing />
+        <EarlyAccess />
         <Builder />
         <Footer />
       </div>

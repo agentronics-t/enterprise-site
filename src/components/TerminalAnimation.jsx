@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 const lines = [
-  { command: '> agent.authenticate()', result: '✓ verified', delay: 0 },
-  { command: '> agent.callTool("addToCart", {id: "E001"})', result: '✓ authorized', delay: 800 },
-  { command: '> agent.getSession()', result: '✓ context loaded', delay: 1600 },
+  { command: '> agent.detect()', result: '✓ ChatGPT Agent (Web Bot Auth)' },
+  { command: '> agent.classify()', result: '✓ intent: price comparison' },
+  { command: '> agent.govern()', result: '✓ read-only scope, audit logged' },
+  { command: '> agent.measure()', result: "✓ attributed to @sarah's assistant" },
 ]
 
 export default function TerminalAnimation() {
@@ -50,9 +51,7 @@ export default function TerminalAnimation() {
       transition={{ duration: 0.8, delay: 0.3 }}
       className="relative w-full max-w-2xl mx-auto"
     >
-      {/* Terminal window chrome */}
       <div className="bg-code-bg rounded-xl border border-border-glow-30 overflow-hidden shadow-2xl shadow-border-glow/10">
-        {/* Title bar */}
         <div className="flex items-center gap-2 px-4 py-3 bg-bg-card border-b border-white/5">
           <div className="w-3 h-3 rounded-full bg-danger/80" />
           <div className="w-3 h-3 rounded-full bg-accent/80" />
@@ -60,8 +59,7 @@ export default function TerminalAnimation() {
           <span className="ml-3 text-xs text-text-secondary font-mono">agentronics-gateway</span>
         </div>
 
-        {/* Terminal body */}
-        <div className="p-5 font-mono text-sm leading-relaxed min-h-[140px]">
+        <div className="p-5 font-mono text-sm leading-relaxed min-h-[180px]">
           {completedLines.map((line, i) => (
             <div key={i} className="flex items-center gap-3 mb-2 flex-wrap">
               <span className="text-text-secondary">{line.command}</span>
@@ -95,7 +93,6 @@ export default function TerminalAnimation() {
         </div>
       </div>
 
-      {/* Glow effect under terminal */}
       <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-3/4 h-16 bg-border-glow/20 blur-3xl rounded-full" />
     </motion.div>
   )

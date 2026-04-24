@@ -1,37 +1,28 @@
 import { motion } from 'framer-motion'
-import { Lock, Shield, Brain, Eye, Minimize2 } from 'lucide-react'
+import { EyeOff, ShieldOff, Store } from 'lucide-react'
 import SectionHeading from '../components/SectionHeading'
 
 const problems = [
   {
-    icon: Lock,
-    title: 'No Authentication',
-    description: 'Any agent can call any tool on any site. No identity verification, no trust layer.',
-    label: 'Security Risk',
+    icon: EyeOff,
+    title: 'Blind Measurement',
+    description:
+      'Agent visits look like human visits. Your conversion rates, bounce rates, ad attribution — all contaminated with non-human traffic. You\'re making business decisions on numbers that are lying to you.',
+    label: 'Contaminated Data',
   },
   {
-    icon: Shield,
-    title: 'No Authorization',
-    description: 'There\'s no way to scope what an agent can do. Read-only or admin — it\'s all the same.',
+    icon: ShieldOff,
+    title: 'Zero Governance',
+    description:
+      'No identity layer, no permission model, no audit trail. Any agent can invoke any action on your site, at any rate, anonymously. An agent shopping for socks could trigger your admin tools.',
     label: 'Compliance Blocker',
   },
   {
-    icon: Brain,
-    title: 'No Memory',
-    description: 'Agents forget everything between pages. No sessions, no preferences, no continuity.',
-    label: 'Broken Experience',
-  },
-  {
-    icon: Eye,
-    title: 'No Observability',
-    description: 'Zero visibility into what agents are doing on your site. No logs, no traces, no alerts.',
-    label: 'Ops Blindspot',
-  },
-  {
-    icon: Minimize2,
-    title: 'Context Bloat',
-    description: '50+ tools sent per call. Most are irrelevant. Token costs explode, quality collapses.',
-    label: 'Cost × Quality',
+    icon: Store,
+    title: 'No Agent Commerce Strategy',
+    description:
+      'Agents are the new buyers. But your site is built to sell to humans — product pages, ad impressions, personalization. None of that works when the "customer" is an LLM. You need a new interface.',
+    label: 'Revenue Leak',
   },
 ]
 
@@ -47,13 +38,14 @@ const cardVariants = {
 export default function Problems() {
   return (
     <section id="problems" className="py-24 px-6">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <SectionHeading
           prefix="THE PROBLEM"
-          title="WebMCP is shipping. The operational chaos is already beginning."
+          title="30% of your site traffic might not be human. You can't see it."
+          subtitle="Your analytics are lying. Your admin tools are exposed. And the next wave of buyers doesn't look like your current ones."
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {problems.map((problem, i) => {
             const Icon = problem.icon
             return (
@@ -64,24 +56,35 @@ export default function Problems() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.1 }}
                 variants={cardVariants}
-                className="card-glow bg-bg-card rounded-xl p-6 flex flex-col"
+                className="card-glow bg-bg-card rounded-xl p-8 flex flex-col"
               >
-                <div className="w-10 h-10 rounded-lg bg-border-glow/10 flex items-center justify-center mb-4">
-                  <Icon size={20} className="text-border-glow" />
+                <div className="w-11 h-11 rounded-lg bg-border-glow/10 flex items-center justify-center mb-5">
+                  <Icon size={22} className="text-border-glow" />
                 </div>
-                <h3 className="text-lg font-bold text-text-primary mb-2">
+                <h3 className="text-xl font-bold text-text-primary mb-3">
                   {problem.title}
                 </h3>
                 <p className="text-sm text-text-secondary leading-relaxed flex-1">
                   {problem.description}
                 </p>
-                <span className="mt-4 inline-block text-xs font-mono font-semibold text-accent tracking-wide">
+                <span className="mt-5 inline-block text-xs font-mono font-semibold text-accent tracking-wide">
                   {problem.label}
                 </span>
               </motion.div>
             )
           })}
         </div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-14 text-center text-base md:text-lg text-text-secondary max-w-3xl mx-auto"
+        >
+          Detection tools tell you <span className="text-text-primary font-semibold">who</span> showed up.
+          They don't tell you <span className="text-accent font-semibold">what to do about it</span>.
+        </motion.p>
       </div>
     </section>
   )

@@ -1,25 +1,28 @@
 import { motion } from 'framer-motion'
-import { Package, Settings, ShieldCheck } from 'lucide-react'
+import { Package, Activity, SlidersHorizontal } from 'lucide-react'
 import SectionHeading from '../components/SectionHeading'
 
 const steps = [
   {
     num: '01',
     icon: Package,
-    title: 'Add the SDK',
-    description: 'One npm install, one init call. The SDK wraps navigator.modelContext.registerTool transparently.',
+    title: 'Drop in the SDK',
+    description:
+      'One npm install, one init call. The SDK intercepts all three agent arrival paths — WebMCP tool calls, Web Bot Auth signatures, and behavioral signals — transparently.',
   },
   {
     num: '02',
-    icon: Settings,
-    title: 'Configure from Dashboard',
-    description: 'Set auth rules, permission scopes, memory retention, and observability alerts from a single control plane.',
+    icon: Activity,
+    title: 'See your real traffic',
+    description:
+      'Your dashboard lights up immediately. Agent vs. human traffic split. Which agents (ChatGPT, Gemini, Claude). What they\'re doing. Who sent them. In real time.',
   },
   {
     num: '03',
-    icon: ShieldCheck,
-    title: 'Agents are governed',
-    description: 'Every tool call is authenticated, authorized, logged, and context-optimized. Zero code changes to your existing WebMCP tools.',
+    icon: SlidersHorizontal,
+    title: 'Set the rules',
+    description:
+      'Apply policy per agent class: read-only for price scrapers, full access for verified purchase agents, block for unauthorized bots. Every action logged for compliance.',
   },
 ]
 
@@ -29,7 +32,7 @@ export default function HowItWorks() {
       <div className="max-w-6xl mx-auto">
         <SectionHeading
           prefix="HOW IT WORKS"
-          title="Three steps to governed agents."
+          title="From install to governed in one afternoon."
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -44,7 +47,6 @@ export default function HowItWorks() {
                 transition={{ duration: 0.5, delay: i * 0.2 }}
                 className="card-glow bg-bg-card rounded-xl p-8 relative overflow-hidden"
               >
-                {/* Step number watermark */}
                 <span className="absolute top-4 right-6 text-6xl font-extrabold text-white/[0.03] select-none">
                   {step.num}
                 </span>

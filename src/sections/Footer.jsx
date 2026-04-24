@@ -4,7 +4,9 @@ const footerLinks = [
   { label: 'Home', href: '#' },
   { label: 'Why Agentronics', href: '#problems' },
   { label: 'How It Works', href: '#how-it-works' },
+  { label: 'Dashboard', href: '#dashboard' },
   { label: 'Pricing', href: '#pricing' },
+  { label: 'Early Access', href: '#early-access' },
 ]
 
 export default function Footer() {
@@ -15,16 +17,16 @@ export default function Footer() {
         {/* CTA banner */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-text-primary mb-4">
-            Ready to govern the pipe?
+            Know every agent. Govern what they do.
           </h2>
           <p className="text-text-secondary mb-8">
-            Deploy enterprise-grade agent infrastructure in minutes.
+            Get a free agent traffic audit — see your real numbers in one afternoon.
           </p>
           <button
             onClick={openWaitlist}
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg-primary font-semibold hover:opacity-90 transition-all cursor-pointer"
           >
-            Get Started
+            Get Early Access
           </button>
         </div>
 

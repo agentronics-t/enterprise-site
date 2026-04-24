@@ -1,44 +1,42 @@
 import { motion } from 'framer-motion'
-import { Check, Minus } from 'lucide-react'
 import SectionHeading from '../components/SectionHeading'
 
-const categories = ['Auth', 'Authz', 'Memory', 'Observability', 'Context']
-const players = [
+const rows = [
   {
-    name: 'Auth0 / Clerk',
-    type: 'incumbent',
-    coverage: [true, true, false, false, false],
+    category: 'Bot Detection',
+    detection: ['HUMAN Security', 'Cloudflare', 'Fingerprint', 'CHEQ', 'Akamai'],
+    governance: '—',
   },
   {
-    name: 'Datadog / Sentry',
-    type: 'incumbent',
-    coverage: [false, false, false, true, false],
+    category: 'Auth Layer',
+    detection: ['Castle.io', 'Nango'],
+    governance: 'Agentronics — policy, scoping, rate limits',
   },
   {
-    name: 'Mem0 / LangGraph',
-    type: 'new',
-    coverage: [false, false, true, false, false],
+    category: 'Observability',
+    detection: ['Snowplow', 'LangSmith', 'Braintrust'],
+    governance: 'Agentronics — agent-specific audit trails',
   },
   {
-    name: 'Custom Code',
-    type: 'diy',
-    coverage: [true, true, true, true, true],
-    note: '6+ months',
+    category: 'Memory / Context',
+    detection: ['Mem0', 'Letta'],
+    governance: 'Agentronics — cross-session, cross-page',
   },
   {
-    name: 'Agentronics',
-    type: 'agentronics',
-    coverage: [true, true, true, true, true],
+    category: 'Agent Commerce',
+    detection: ['—'],
+    governance: 'Agentronics — catalogs, trust scores, bidding',
   },
 ]
 
 export default function Landscape() {
   return (
     <section id="landscape" className="py-24 px-6">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <SectionHeading
           prefix="LANDSCAPE"
-          title="They solve pieces. We govern the pipe."
+          title="They detect. We govern."
+          subtitle="Detection tells you who showed up. Governance tells you what to do about it."
         />
 
         <motion.div
@@ -46,73 +44,71 @@ export default function Landscape() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="overflow-x-auto"
+          className="overflow-x-auto rounded-xl border border-white/10"
         >
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-white/10">
-                <th className="text-left py-4 px-4 text-text-secondary font-mono text-xs uppercase tracking-wider">
-                  Solution
+              <tr className="bg-bg-card border-b border-white/10">
+                <th className="text-left py-5 px-5 text-text-secondary font-mono text-xs uppercase tracking-wider w-1/5">
+                  Category
                 </th>
-                {categories.map((cat) => (
-                  <th key={cat} className="py-4 px-4 text-center text-text-secondary font-mono text-xs uppercase tracking-wider">
-                    {cat}
-                  </th>
-                ))}
+                <th className="text-left py-5 px-5 text-text-secondary font-mono text-xs uppercase tracking-wider w-2/5">
+                  Detection · <span className="text-text-primary">WHO</span>
+                </th>
+                <th className="text-left py-5 px-5 text-accent font-mono text-xs uppercase tracking-wider w-2/5">
+                  Governance · <span className="text-accent">WHAT TO DO</span>
+                </th>
               </tr>
             </thead>
             <tbody>
-              {players.map((player, idx) => (
+              {rows.map((row, i) => (
                 <motion.tr
-                  key={player.name}
+                  key={row.category}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: idx * 0.1 }}
-                  className={`border-b border-white/5 ${
-                    player.type === 'agentronics'
-                      ? 'bg-border-glow/5'
-                      : ''
-                  }`}
+                  transition={{ duration: 0.4, delay: i * 0.08 }}
+                  className="border-b border-white/5 last:border-b-0 bg-bg-card/40"
                 >
-                  <td className="py-4 px-4">
-                    <div className="flex items-center gap-2">
-                      <span className={`font-semibold ${
-                        player.type === 'agentronics'
-                          ? 'text-accent'
-                          : 'text-text-primary'
-                      }`}>
-                        {player.name}
-                      </span>
-                      {player.note && (
-                        <span className="text-xs text-danger font-mono">({player.note})</span>
-                      )}
+                  <td className="py-5 px-5 align-top">
+                    <span className="font-semibold text-text-primary">{row.category}</span>
+                  </td>
+                  <td className="py-5 px-5 align-top">
+                    <div className="flex flex-wrap gap-1.5">
+                      {row.detection.map((d) => (
+                        <span
+                          key={d}
+                          className={`text-xs font-mono px-2 py-1 rounded ${
+                            d === '—'
+                              ? 'text-text-secondary/40'
+                              : 'bg-white/5 border border-white/10 text-text-secondary'
+                          }`}
+                        >
+                          {d}
+                        </span>
+                      ))}
                     </div>
                   </td>
-                  {player.coverage.map((has, i) => (
-                    <td key={i} className="py-4 px-4 text-center">
-                      {has ? (
-                        <span className={`inline-flex items-center justify-center w-6 h-6 rounded-full ${
-                          player.type === 'agentronics'
-                            ? 'bg-accent/20 text-accent'
-                            : player.type === 'diy'
-                              ? 'bg-danger/20 text-danger'
-                              : 'bg-success/20 text-success'
-                        }`}>
-                          <Check size={14} />
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/5 text-text-secondary/30">
-                          <Minus size={14} />
-                        </span>
-                      )}
-                    </td>
-                  ))}
+                  <td className="py-5 px-5 align-top">
+                    <span
+                      className={`text-xs font-mono ${
+                        row.governance === '—'
+                          ? 'text-text-secondary/40'
+                          : 'inline-block px-2 py-1 rounded bg-accent/10 border border-accent/30 text-accent'
+                      }`}
+                    >
+                      {row.governance}
+                    </span>
+                  </td>
                 </motion.tr>
               ))}
             </tbody>
           </table>
         </motion.div>
+
+        <p className="mt-10 text-center text-text-secondary">
+          They solve pieces. <span className="text-text-primary font-semibold">We govern the pipe.</span>
+        </p>
       </div>
     </section>
   )

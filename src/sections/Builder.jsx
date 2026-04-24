@@ -28,15 +28,16 @@ export default function Builder() {
             {/* Quote */}
             <blockquote className="mt-6 mb-8 max-w-2xl mx-auto">
               <p className="text-lg md:text-xl text-text-secondary leading-relaxed italic">
-                "WebMCP is to AI agents what TCP/IP was to the internet — the plumbing.
-                But TCP/IP needed DNS, TLS, firewalls, and load balancers before it was
-                production-ready. Agentronics is that operational layer for the agentic web."
+                "WebMCP is the TCP/IP moment for AI agents on the web. Just as
+                TCP/IP needed routers, firewalls, and load balancers — the agent
+                web needs identity, governance, and measurement. That
+                infrastructure is Agentronics."
               </p>
             </blockquote>
 
             {/* Credentials */}
             <div className="flex flex-wrap items-center justify-center gap-3">
-              {['Zera', 'NSCIF 2026 Finalist', 'context-hub contributor'].map((cred) => (
+              {['Zera (MCP + Google ADK)', 'NSCIF 2026 Top 100', 'context-hub PR #97'].map((cred) => (
                 <span
                   key={cred}
                   className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-text-secondary"
