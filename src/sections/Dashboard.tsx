@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle2, AlertTriangle, ShieldAlert, Activity } from 'lucide-react'
-import SectionHeading from '../components/SectionHeading'
+import { SectionHeading } from '../components/ui/SectionHeading'
 import { useWaitlist } from '../components/WaitlistContext'
 
 const trafficMix = [
@@ -11,7 +11,10 @@ const trafficMix = [
   { label: 'Unknown', pct: 3, color: '#ef4444' },
 ]
 
-const activityFeed = [
+type ActivityStatus = 'allowed' | 'blocked'
+type ActivityRow = { agent: string; action: string; status: ActivityStatus; time: string }
+
+const activityFeed: ActivityRow[] = [
   { agent: 'ChatGPT', action: 'product.search("noise-cancel headphones")', status: 'allowed', time: '2s ago' },
   { agent: 'Gemini', action: 'cart.add(id=E001)', status: 'allowed', time: '4s ago' },
   { agent: 'Stealth', action: 'admin.exportUsers()', status: 'blocked', time: '7s ago' },
@@ -19,7 +22,7 @@ const activityFeed = [
   { agent: 'ChatGPT', action: 'checkout.begin()', status: 'allowed', time: '18s ago' },
 ]
 
-const statusColor = {
+const statusColor: Record<ActivityStatus, string> = {
   allowed: 'text-success',
   blocked: 'text-danger',
 }
@@ -77,7 +80,7 @@ export default function Dashboard() {
           className="card-glow bg-bg-card rounded-2xl border border-border-glow-30 p-6 md:p-8"
         >
           {/* Header strip */}
-          <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/5">
+          <div className="flex items-center justify-between mb-6 pb-4 border-b border-border">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
               <span className="text-xs font-mono text-text-secondary">LIVE</span>
@@ -91,7 +94,7 @@ export default function Dashboard() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Donut */}
-            <div className="lg:col-span-1 bg-code-bg rounded-xl border border-white/5 p-6">
+            <div className="lg:col-span-1 bg-bg-code rounded-xl border border-border p-6">
               <p className="text-xs font-mono text-text-secondary uppercase tracking-wider mb-4">
                 Traffic Mix
               </p>
@@ -115,7 +118,7 @@ export default function Dashboard() {
             </div>
 
             {/* Activity feed */}
-            <div className="lg:col-span-2 bg-code-bg rounded-xl border border-white/5 p-6">
+            <div className="lg:col-span-2 bg-bg-code rounded-xl border border-border p-6">
               <div className="flex items-center justify-between mb-4">
                 <p className="text-xs font-mono text-text-secondary uppercase tracking-wider">
                   Agent Activity
@@ -130,7 +133,7 @@ export default function Dashboard() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: i * 0.08 }}
-                    className="flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg bg-bg-primary/50 border border-white/5 font-mono text-xs"
+                    className="flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg bg-bg/50 border border-border font-mono text-xs"
                   >
                     <span className="text-accent w-20 truncate">{row.agent}</span>
                     <span className="text-text-secondary flex-1 truncate">{row.action}</span>
@@ -151,7 +154,7 @@ export default function Dashboard() {
               </div>
 
               {/* Stat strip */}
-              <div className="grid grid-cols-3 gap-3 mt-6 pt-4 border-t border-white/5">
+              <div className="grid grid-cols-3 gap-3 mt-6 pt-4 border-t border-border">
                 <div>
                   <p className="text-xs font-mono text-text-secondary">Governed Calls</p>
                   <p className="text-2xl font-extrabold text-text-primary mt-1">214,809</p>
@@ -176,7 +179,7 @@ export default function Dashboard() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-bg-card rounded-xl border border-white/10 p-8 relative overflow-hidden"
+            className="bg-bg-card rounded-xl border border-border p-8 relative overflow-hidden"
           >
             <div className="absolute top-0 left-0 right-0 h-1 bg-danger/50" />
             <div className="flex items-center gap-2 mb-5">
@@ -242,7 +245,7 @@ export default function Dashboard() {
         >
           <button
             onClick={openWaitlist}
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg-primary font-semibold hover:opacity-90 transition-all cursor-pointer"
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg font-semibold hover:opacity-90 transition-all cursor-pointer"
           >
             Get a free agent-traffic audit
             <ArrowRight size={18} className="group-hover:translate-x-0.5 transition-transform" />

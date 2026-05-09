@@ -12,7 +12,7 @@ const footerLinks = [
 export default function Footer() {
   const { openWaitlist } = useWaitlist()
   return (
-    <footer className="border-t border-white/5 py-16 px-6">
+    <footer className="border-t border-border py-16 px-6">
       <div className="max-w-6xl mx-auto">
         {/* CTA banner */}
         <div className="text-center mb-16">
@@ -24,13 +24,13 @@ export default function Footer() {
           </p>
           <button
             onClick={openWaitlist}
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg-primary font-semibold hover:opacity-90 transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg font-semibold hover:opacity-90 transition-all cursor-pointer"
           >
             Get Early Access
           </button>
         </div>
 
-        <div className="border-t border-white/5 pt-10 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="border-t border-border pt-10 flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Logo & tagline */}
           <div className="flex items-center gap-3 text-center md:text-left">
             <img src="/favicon.svg" alt="Agentronics" className="w-8 h-8" />

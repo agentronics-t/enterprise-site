@@ -1,9 +1,15 @@
 import { useState, useEffect, useRef } from 'react'
 import { useInView } from 'framer-motion'
 
-export default function AnimatedCounter({ target, suffix = '', duration = 2000 }) {
+type Props = {
+  target: number
+  suffix?: string
+  duration?: number
+}
+
+export default function AnimatedCounter({ target, suffix = '', duration = 2000 }: Props) {
   const [count, setCount] = useState(0)
-  const ref = useRef(null)
+  const ref = useRef<HTMLSpanElement>(null)
   const isInView = useInView(ref, { once: true })
   const hasAnimated = useRef(false)
 

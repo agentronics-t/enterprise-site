@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import SectionHeading from '../components/SectionHeading'
+import { SectionHeading } from '../components/ui/SectionHeading'
 
 const rows = [
   {
@@ -44,11 +44,11 @@ export default function Landscape() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="overflow-x-auto rounded-xl border border-white/10"
+          className="overflow-x-auto rounded-xl border border-border"
         >
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-bg-card border-b border-white/10">
+              <tr className="bg-bg-card border-b border-border">
                 <th className="text-left py-5 px-5 text-text-secondary font-mono text-xs uppercase tracking-wider w-1/5">
                   Category
                 </th>
@@ -68,7 +68,7 @@ export default function Landscape() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: i * 0.08 }}
-                  className="border-b border-white/5 last:border-b-0 bg-bg-card/40"
+                  className="border-b border-border last:border-b-0 bg-bg-card/40"
                 >
                   <td className="py-5 px-5 align-top">
                     <span className="font-semibold text-text-primary">{row.category}</span>
@@ -81,7 +81,7 @@ export default function Landscape() {
                           className={`text-xs font-mono px-2 py-1 rounded ${
                             d === '—'
                               ? 'text-text-secondary/40'
-                              : 'bg-white/5 border border-white/10 text-text-secondary'
+                              : 'bg-bg-elevated border border-border text-text-secondary'
                           }`}
                         >
                           {d}

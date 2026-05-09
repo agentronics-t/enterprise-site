@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { BookOpen, Gauge, Gavel, MessageSquare } from 'lucide-react'
-import SectionHeading from '../components/SectionHeading'
+import { SectionHeading } from '../components/ui/SectionHeading'
 
 const cards = [
   {

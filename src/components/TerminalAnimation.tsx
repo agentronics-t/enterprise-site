@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
-const lines = [
+type Line = { command: string; result: string }
+
+const lines: Line[] = [
   { command: '> agent.detect()', result: '✓ ChatGPT Agent (Web Bot Auth)' },
   { command: '> agent.classify()', result: '✓ intent: price comparison' },
   { command: '> agent.govern()', result: '✓ read-only scope, audit logged' },
@@ -13,12 +15,13 @@ export default function TerminalAnimation() {
   const [typingIndex, setTypingIndex] = useState(0)
   const [currentText, setCurrentText] = useState('')
   const [showResult, setShowResult] = useState(false)
-  const [completedLines, setCompletedLines] = useState([])
+  const [completedLines, setCompletedLines] = useState<Line[]>([])
 
   useEffect(() => {
     if (visibleLines >= lines.length) return
 
     const line = lines[visibleLines]
+    if (!line) return
     const fullText = line.command
 
     if (typingIndex < fullText.length) {
@@ -51,8 +54,8 @@ export default function TerminalAnimation() {
       transition={{ duration: 0.8, delay: 0.3 }}
       className="relative w-full max-w-2xl mx-auto"
     >
-      <div className="bg-code-bg rounded-xl border border-border-glow-30 overflow-hidden shadow-2xl shadow-border-glow/10">
-        <div className="flex items-center gap-2 px-4 py-3 bg-bg-card border-b border-white/5">
+      <div className="bg-bg-code rounded-xl border border-border-glow-30 overflow-hidden shadow-2xl shadow-border-glow/10">
+        <div className="flex items-center gap-2 px-4 py-3 bg-bg-card border-b border-border">
           <div className="w-3 h-3 rounded-full bg-danger/80" />
           <div className="w-3 h-3 rounded-full bg-accent/80" />
           <div className="w-3 h-3 rounded-full bg-success/80" />
@@ -78,7 +81,7 @@ export default function TerminalAnimation() {
                   animate={{ opacity: 1 }}
                   className="text-success ml-auto"
                 >
-                  {lines[visibleLines].result}
+                  {lines[visibleLines]?.result}
                 </motion.span>
               )}
             </div>

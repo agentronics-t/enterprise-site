@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { useWaitlist } from './WaitlistContext'
+import { ThemeToggle } from './ui/ThemeToggle'
 
 const navLinks = [
   { label: 'Why Agentronics', href: '#problems' },
@@ -28,7 +29,7 @@ export default function Navbar() {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-bg-primary/80 backdrop-blur-xl border-b border-white/5'
+          ? 'bg-bg/80 backdrop-blur-xl border-b border-border'
           : 'bg-transparent'
       }`}
     >
@@ -56,21 +57,26 @@ export default function Navbar() {
 
         {/* CTAs */}
         <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
           <button
             onClick={openWaitlist}
-            className="px-4 py-2 text-sm font-semibold rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg-primary hover:opacity-90 transition-opacity cursor-pointer"
+            className="px-4 py-2 text-sm font-semibold rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg hover:opacity-90 transition-opacity cursor-pointer"
           >
             Get Early Access
           </button>
         </div>
 
         {/* Mobile toggle */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-text-primary"
-        >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="md:hidden flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="text-text-primary"
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+          >
+            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -78,7 +84,7 @@ export default function Navbar() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="md:hidden bg-bg-card/95 backdrop-blur-xl border-b border-white/5 px-6 pb-6"
+          className="md:hidden bg-bg-card/95 backdrop-blur-xl border-b border-border px-6 pb-6"
         >
           <div className="flex flex-col gap-4 pt-4">
             {navLinks.map((link) => (
@@ -93,7 +99,7 @@ export default function Navbar() {
             ))}
             <button
               onClick={() => { setMobileOpen(false); openWaitlist(); }}
-              className="px-4 py-2 text-center text-sm font-semibold rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg-primary cursor-pointer"
+              className="px-4 py-2 text-center text-sm font-semibold rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg cursor-pointer"
             >
               Get Early Access
             </button>

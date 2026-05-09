@@ -29,7 +29,7 @@ export default function LandingPage() {
 
   return (
     <WaitlistProvider>
-      <div className="min-h-screen bg-bg-primary">
+      <div className="min-h-screen bg-bg">
         <Navbar />
         <Hero />
         <Problems />

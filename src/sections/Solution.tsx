@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { KeyRound, Shield, Brain, Eye, BarChart3 } from 'lucide-react'
-import SectionHeading from '../components/SectionHeading'
+import { SectionHeading } from '../components/ui/SectionHeading'
 
 const lanes = [
   {
@@ -58,7 +58,7 @@ export default function Solution() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.15 }}
-                className="relative rounded-lg bg-code-bg border border-white/10 p-5 text-center"
+                className="relative rounded-lg bg-bg-code border border-border p-5 text-center"
               >
                 <div
                   className="absolute top-0 left-6 right-6 h-0.5 rounded-full"
@@ -139,7 +139,7 @@ export default function Solution() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 1 }}
-            className="mx-auto max-w-md px-6 py-4 bg-code-bg rounded-lg border border-white/10 text-center"
+            className="mx-auto max-w-md px-6 py-4 bg-bg-code rounded-lg border border-border text-center"
           >
             <span className="text-xs font-mono text-text-secondary block mb-1">Your site / app</span>
             <span className="text-base font-bold text-text-primary">Governed · Measured</span>
@@ -154,8 +154,8 @@ export default function Solution() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="max-w-2xl mx-auto mb-14"
         >
-          <div className="bg-code-bg rounded-xl border border-border-glow-30 overflow-hidden">
-            <div className="flex items-center gap-2 px-4 py-3 bg-bg-card border-b border-white/5">
+          <div className="bg-bg-code rounded-xl border border-border-glow-30 overflow-hidden">
+            <div className="flex items-center gap-2 px-4 py-3 bg-bg-card border-b border-border">
               <div className="w-3 h-3 rounded-full bg-danger/80" />
               <div className="w-3 h-3 rounded-full bg-accent/80" />
               <div className="w-3 h-3 rounded-full bg-success/80" />

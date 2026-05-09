@@ -40,7 +40,7 @@ export default function Builder() {
               {['Zera (MCP + Google ADK)', 'NSCIF 2026 Top 100', 'context-hub PR #97'].map((cred) => (
                 <span
                   key={cred}
-                  className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-text-secondary"
+                  className="px-3 py-1 rounded-full bg-bg-elevated border border-border text-xs font-mono text-text-secondary"
                 >
                   {cred}
                 </span>

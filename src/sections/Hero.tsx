@@ -57,14 +57,14 @@ export default function Hero() {
         >
           <button
             onClick={openWaitlist}
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg-primary font-semibold text-base hover:opacity-90 transition-all cursor-pointer"
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg font-semibold text-base hover:opacity-90 transition-all cursor-pointer"
           >
             Get Early Access
             <ArrowRight size={18} className="group-hover:translate-x-0.5 transition-transform" />
           </button>
           <a
             href="#dashboard"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/15 text-text-primary font-semibold text-base hover:border-white/30 hover:bg-white/5 transition-all"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-border-strong text-text-primary font-semibold text-base hover:border-border-strong hover:bg-bg-elevated transition-all"
           >
             See the Dashboard
           </a>

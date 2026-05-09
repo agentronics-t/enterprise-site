@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Check, ArrowRight } from 'lucide-react'
-import SectionHeading from '../components/SectionHeading'
+import { SectionHeading } from '../components/ui/SectionHeading'
 import { useWaitlist } from '../components/WaitlistContext'
 
 const plans = [
@@ -71,7 +71,7 @@ export default function Pricing() {
           <button
             onClick={() => setYearly(!yearly)}
             className={`relative w-12 h-6 rounded-full transition-colors ${
-              yearly ? 'bg-accent' : 'bg-white/20'
+              yearly ? 'bg-accent' : 'bg-border-strong'
             }`}
           >
             <span className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white transition-transform ${
@@ -95,7 +95,7 @@ export default function Pricing() {
               className={`relative rounded-xl p-8 flex flex-col ${
                 plan.popular
                   ? 'bg-bg-card border-2 border-border-glow/50 shadow-lg shadow-border-glow/10'
-                  : 'bg-bg-card border border-white/10'
+                  : 'bg-bg-card border border-border'
               }`}
             >
               {plan.popular && (
@@ -133,8 +133,8 @@ export default function Pricing() {
                 onClick={openWaitlist}
                 className={`group flex items-center justify-center gap-2 px-5 py-3 rounded-lg font-semibold text-sm transition-all cursor-pointer ${
                   plan.popular
-                    ? 'bg-gradient-to-r from-accent to-accent-hover text-bg-primary hover:opacity-90'
-                    : 'border border-white/15 text-text-primary hover:border-white/30 hover:bg-white/5'
+                    ? 'bg-gradient-to-r from-accent to-accent-hover text-bg hover:opacity-90'
+                    : 'border border-border-strong text-text-primary hover:border-border-strong hover:bg-bg-elevated'
                 }`}
               >
                 {plan.cta}

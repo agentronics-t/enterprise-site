@@ -1,16 +1,18 @@
-import { useState } from 'react'
+import { useState, type FormEvent } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle } from 'lucide-react'
-import SectionHeading from '../components/SectionHeading'
+import { SectionHeading } from '../components/ui/SectionHeading'
+
+type Status = 'idle' | 'submitting' | 'success' | 'error'
 
 export default function EarlyAccess() {
   const [email, setEmail] = useState('')
   const [name, setName] = useState('')
   const [business, setBusiness] = useState('')
-  const [status, setStatus] = useState('idle') // idle | submitting | success | error
+  const [status, setStatus] = useState<Status>('idle')
   const [errorMsg, setErrorMsg] = useState('')
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setStatus('submitting')
     setErrorMsg('')
@@ -21,12 +23,12 @@ export default function EarlyAccess() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, business }),
       })
-      const data = await res.json()
+      const data = (await res.json()) as { error?: string }
       if (!res.ok) throw new Error(data.error || 'Something went wrong')
       setStatus('success')
     } catch (err) {
       setStatus('error')
-      setErrorMsg(err.message)
+      setErrorMsg(err instanceof Error ? err.message : 'Something went wrong')
     }
   }
 
@@ -65,7 +67,7 @@ export default function EarlyAccess() {
                   placeholder="Your name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg bg-code-bg border border-white/10 focus:border-border-glow/60 focus:outline-none text-text-primary placeholder:text-text-secondary/50 font-mono text-sm"
+                  className="w-full px-4 py-3 rounded-lg bg-bg-code border border-border focus:border-border-glow/60 focus:outline-none text-text-primary placeholder:text-text-secondary/50 font-mono text-sm"
                 />
                 <input
                   type="email"
@@ -73,7 +75,7 @@ export default function EarlyAccess() {
                   placeholder="you@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg bg-code-bg border border-white/10 focus:border-border-glow/60 focus:outline-none text-text-primary placeholder:text-text-secondary/50 font-mono text-sm"
+                  className="w-full px-4 py-3 rounded-lg bg-bg-code border border-border focus:border-border-glow/60 focus:outline-none text-text-primary placeholder:text-text-secondary/50 font-mono text-sm"
                 />
               </div>
               <input
@@ -81,13 +83,13 @@ export default function EarlyAccess() {
                 placeholder="Company / site URL (optional)"
                 value={business}
                 onChange={(e) => setBusiness(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-code-bg border border-white/10 focus:border-border-glow/60 focus:outline-none text-text-primary placeholder:text-text-secondary/50 font-mono text-sm"
+                className="w-full px-4 py-3 rounded-lg bg-bg-code border border-border focus:border-border-glow/60 focus:outline-none text-text-primary placeholder:text-text-secondary/50 font-mono text-sm"
               />
 
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className="group w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg-primary font-semibold hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                className="group w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg font-semibold hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 {status === 'submitting' ? 'Submitting...' : 'Get Early Access'}
                 <ArrowRight size={18} className="group-hover:translate-x-0.5 transition-transform" />

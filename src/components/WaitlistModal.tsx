@@ -1,17 +1,24 @@
-import { useState } from 'react'
+import { useState, type ChangeEvent, type FormEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ArrowRight, CheckCircle } from 'lucide-react'
 
-export default function WaitlistModal({ open, onClose }) {
+type Status = 'idle' | 'submitting' | 'success' | 'error'
+
+type Props = {
+  open: boolean
+  onClose: () => void
+}
+
+export default function WaitlistModal({ open, onClose }: Props) {
   const [form, setForm] = useState({ name: '', email: '', business: '' })
-  const [status, setStatus] = useState('idle') // idle | submitting | success | error
+  const [status, setStatus] = useState<Status>('idle')
   const [errorMsg, setErrorMsg] = useState('')
 
-  function handleChange(e) {
+  function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setStatus('submitting')
     setErrorMsg('')
@@ -22,7 +29,7 @@ export default function WaitlistModal({ open, onClose }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       })
-      const data = await res.json()
+      const data = (await res.json()) as { error?: string }
 
       if (!res.ok) {
         throw new Error(data.error || 'Something went wrong')
@@ -31,7 +38,7 @@ export default function WaitlistModal({ open, onClose }) {
       setStatus('success')
     } catch (err) {
       setStatus('error')
-      setErrorMsg(err.message)
+      setErrorMsg(err instanceof Error ? err.message : 'Something went wrong')
     }
   }
 
@@ -87,7 +94,7 @@ export default function WaitlistModal({ open, onClose }) {
                 </p>
                 <button
                   onClick={handleClose}
-                  className="mt-6 px-6 py-2.5 rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg-primary font-semibold text-sm hover:opacity-90 transition-opacity"
+                  className="mt-6 px-6 py-2.5 rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg font-semibold text-sm hover:opacity-90 transition-opacity"
                 >
                   Done
                 </button>
@@ -114,7 +121,7 @@ export default function WaitlistModal({ open, onClose }) {
                       value={form.name}
                       onChange={handleChange}
                       placeholder="Your name"
-                      className="w-full px-4 py-2.5 rounded-lg bg-bg-primary border border-white/10 text-text-primary placeholder:text-text-secondary/40 text-sm focus:outline-none focus:border-border-glow/50 focus:ring-1 focus:ring-border-glow/30 transition-colors"
+                      className="w-full px-4 py-2.5 rounded-lg bg-bg border border-border text-text-primary placeholder:text-text-secondary/40 text-sm focus:outline-none focus:border-border-glow/50 focus:ring-1 focus:ring-border-glow/30 transition-colors"
                     />
                   </div>
 
@@ -130,7 +137,7 @@ export default function WaitlistModal({ open, onClose }) {
                       value={form.email}
                       onChange={handleChange}
                       placeholder="you@company.com"
-                      className="w-full px-4 py-2.5 rounded-lg bg-bg-primary border border-white/10 text-text-primary placeholder:text-text-secondary/40 text-sm focus:outline-none focus:border-border-glow/50 focus:ring-1 focus:ring-border-glow/30 transition-colors"
+                      className="w-full px-4 py-2.5 rounded-lg bg-bg border border-border text-text-primary placeholder:text-text-secondary/40 text-sm focus:outline-none focus:border-border-glow/50 focus:ring-1 focus:ring-border-glow/30 transition-colors"
                     />
                   </div>
 
@@ -145,7 +152,7 @@ export default function WaitlistModal({ open, onClose }) {
                       value={form.business}
                       onChange={handleChange}
                       placeholder="What does your company do? How would you use Agentronics?"
-                      className="w-full px-4 py-2.5 rounded-lg bg-bg-primary border border-white/10 text-text-primary placeholder:text-text-secondary/40 text-sm focus:outline-none focus:border-border-glow/50 focus:ring-1 focus:ring-border-glow/30 transition-colors resize-none"
+                      className="w-full px-4 py-2.5 rounded-lg bg-bg border border-border text-text-primary placeholder:text-text-secondary/40 text-sm focus:outline-none focus:border-border-glow/50 focus:ring-1 focus:ring-border-glow/30 transition-colors resize-none"
                     />
                   </div>
 
@@ -156,7 +163,7 @@ export default function WaitlistModal({ open, onClose }) {
                   <button
                     type="submit"
                     disabled={status === 'submitting'}
-                    className="group w-full flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg-primary font-semibold text-sm hover:opacity-90 transition-all disabled:opacity-60"
+                    className="group w-full flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg font-semibold text-sm hover:opacity-90 transition-all disabled:opacity-60"
                   >
                     {status === 'submitting' ? 'Submitting...' : 'Join the Waitlist'}
                     {status !== 'submitting' && (

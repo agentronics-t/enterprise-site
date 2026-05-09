@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 import { EyeOff, ShieldOff, Store } from 'lucide-react'
-import SectionHeading from '../components/SectionHeading'
+import { SectionHeading } from '../components/ui/SectionHeading'
 
 const problems = [
   {
@@ -26,12 +26,12 @@ const problems = [
   },
 ]
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 40 },
-  visible: (i) => ({
+  visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, delay: i * 0.15, ease: 'easeOut' },
+    transition: { duration: 0.5, delay: i * 0.15, ease: 'easeOut' as const },
   }),
 }
 

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Package, Activity, SlidersHorizontal } from 'lucide-react'
-import SectionHeading from '../components/SectionHeading'
+import { SectionHeading } from '../components/ui/SectionHeading'
 
 const steps = [
   {
@@ -47,7 +47,7 @@ export default function HowItWorks() {
                 transition={{ duration: 0.5, delay: i * 0.2 }}
                 className="card-glow bg-bg-card rounded-xl p-8 relative overflow-hidden"
               >
-                <span className="absolute top-4 right-6 text-6xl font-extrabold text-white/[0.03] select-none">
+                <span className="absolute top-4 right-6 text-6xl font-extrabold text-text-primary/[0.04] select-none">
                   {step.num}
                 </span>
 
