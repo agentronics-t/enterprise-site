@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import TerminalAnimation from '../components/TerminalAnimation'
-import { useWaitlist } from '../components/WaitlistContext'
+
+const DASHBOARD_SIGN_UP = 'https://app.agentronics.dev/sign-up'
 
 export default function Hero() {
-  const { openWaitlist } = useWaitlist()
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-16 overflow-hidden">
       <div className="absolute inset-0 dot-grid pointer-events-none" />
@@ -55,13 +55,13 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.9 }}
           className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
-          <button
-            onClick={openWaitlist}
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg font-semibold text-base hover:opacity-90 transition-all cursor-pointer"
+          <a
+            href={DASHBOARD_SIGN_UP}
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg font-semibold text-base hover:opacity-90 transition-all"
           >
-            Get Early Access
+            Get started
             <ArrowRight size={18} className="group-hover:translate-x-0.5 transition-transform" />
-          </button>
+          </a>
           <a
             href="#dashboard"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-border-strong text-text-primary font-semibold text-base hover:border-border-strong hover:bg-bg-elevated transition-all"

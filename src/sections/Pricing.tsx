@@ -4,7 +4,24 @@ import { Check, ArrowRight } from 'lucide-react'
 import { SectionHeading } from '../components/ui/SectionHeading'
 import { useWaitlist } from '../components/WaitlistContext'
 
-const plans = [
+const DASHBOARD_SIGN_UP = 'https://app.agentronics.dev/sign-up'
+
+type PlanAction =
+  | { kind: 'sign-up' }
+  | { kind: 'contact-sales' }
+
+interface Plan {
+  name: string
+  tagline: string
+  monthlyPrice: number | null
+  yearlyPrice: number | null
+  features: string[]
+  cta: string
+  action: PlanAction
+  popular: boolean
+}
+
+const plans: Plan[] = [
   {
     name: 'Free',
     tagline: 'For indie devs & WebMCP experimenters',
@@ -16,7 +33,8 @@ const plans = [
       'Community support',
       'Single site',
     ],
-    cta: 'Get Started',
+    cta: 'Get started',
+    action: { kind: 'sign-up' },
     popular: false,
   },
   {
@@ -32,7 +50,8 @@ const plans = [
       'Agent analytics — clean your data',
       'Email support',
     ],
-    cta: 'Start Pro Trial',
+    cta: 'Start Pro trial',
+    action: { kind: 'sign-up' },
     popular: true,
   },
   {
@@ -48,7 +67,8 @@ const plans = [
       'Dedicated onboarding',
       'Agent commerce features (early access)',
     ],
-    cta: 'Contact Sales',
+    cta: 'Contact sales',
+    action: { kind: 'contact-sales' },
     popular: false,
   },
 ]
@@ -129,17 +149,31 @@ export default function Pricing() {
                 ))}
               </ul>
 
-              <button
-                onClick={openWaitlist}
-                className={`group flex items-center justify-center gap-2 px-5 py-3 rounded-lg font-semibold text-sm transition-all cursor-pointer ${
-                  plan.popular
-                    ? 'bg-gradient-to-r from-accent to-accent-hover text-bg hover:opacity-90'
-                    : 'border border-border-strong text-text-primary hover:border-border-strong hover:bg-bg-elevated'
-                }`}
-              >
-                {plan.cta}
-                <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
-              </button>
+              {plan.action.kind === 'sign-up' ? (
+                <a
+                  href={DASHBOARD_SIGN_UP}
+                  className={`group flex items-center justify-center gap-2 px-5 py-3 rounded-lg font-semibold text-sm transition-all ${
+                    plan.popular
+                      ? 'bg-gradient-to-r from-accent to-accent-hover text-bg hover:opacity-90'
+                      : 'border border-border-strong text-text-primary hover:border-border-strong hover:bg-bg-elevated'
+                  }`}
+                >
+                  {plan.cta}
+                  <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+                </a>
+              ) : (
+                <button
+                  onClick={openWaitlist}
+                  className={`group flex items-center justify-center gap-2 px-5 py-3 rounded-lg font-semibold text-sm transition-all cursor-pointer ${
+                    plan.popular
+                      ? 'bg-gradient-to-r from-accent to-accent-hover text-bg hover:opacity-90'
+                      : 'border border-border-strong text-text-primary hover:border-border-strong hover:bg-bg-elevated'
+                  }`}
+                >
+                  {plan.cta}
+                  <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+                </button>
+              )}
             </motion.div>
           ))}
         </div>

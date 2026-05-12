@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-import { useWaitlist } from './WaitlistContext'
 import { ThemeToggle } from './ui/ThemeToggle'
+
+const DASHBOARD_SIGN_IN = 'https://app.agentronics.dev/sign-in'
+const DASHBOARD_SIGN_UP = 'https://app.agentronics.dev/sign-up'
 
 const navLinks = [
   { label: 'Why Agentronics', href: '#problems' },
@@ -12,7 +14,6 @@ const navLinks = [
 ]
 
 export default function Navbar() {
-  const { openWaitlist } = useWaitlist()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
@@ -56,14 +57,20 @@ export default function Navbar() {
         </div>
 
         {/* CTAs */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-4">
           <ThemeToggle />
-          <button
-            onClick={openWaitlist}
-            className="px-4 py-2 text-sm font-semibold rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg hover:opacity-90 transition-opacity cursor-pointer"
+          <a
+            href={DASHBOARD_SIGN_IN}
+            className="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
           >
-            Get Early Access
-          </button>
+            Sign in
+          </a>
+          <a
+            href={DASHBOARD_SIGN_UP}
+            className="px-4 py-2 text-sm font-semibold rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg hover:opacity-90 transition-opacity"
+          >
+            Get started
+          </a>
         </div>
 
         {/* Mobile toggle */}
@@ -97,12 +104,20 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
-            <button
-              onClick={() => { setMobileOpen(false); openWaitlist(); }}
-              className="px-4 py-2 text-center text-sm font-semibold rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg cursor-pointer"
+            <a
+              href={DASHBOARD_SIGN_IN}
+              onClick={() => setMobileOpen(false)}
+              className="px-4 py-2 text-center text-sm font-medium rounded-lg border border-border-strong text-text-primary"
             >
-              Get Early Access
-            </button>
+              Sign in
+            </a>
+            <a
+              href={DASHBOARD_SIGN_UP}
+              onClick={() => setMobileOpen(false)}
+              className="px-4 py-2 text-center text-sm font-semibold rounded-lg bg-gradient-to-r from-accent to-accent-hover text-bg"
+            >
+              Get started
+            </a>
           </div>
         </motion.div>
       )}
